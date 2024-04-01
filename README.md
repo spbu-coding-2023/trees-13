@@ -66,7 +66,7 @@ three
 four
 ```
 
-### Example of use on an AVL tree:
+### Example of use on an Binary tree:
 ```
 val tree = BinaryTreeSearch<Int, String>()
 tree.insert(45, "apple")
