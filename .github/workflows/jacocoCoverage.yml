@@ -28,4 +28,4 @@ jobs:
           title: Code Coverage
           update-comment: true
           pass-emoji: ':green_circle:'
-          fail-emoji: ':red_circle:
+          fail-emoji: ':red_circle:'
