@@ -153,28 +153,45 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
         return node
     }
 
+    /**
+     * The method executes tree balancing
+     * Gets the inserted node
+     * Calling in the private insert method
+     */
     private fun fixInsert( node1: RedBlackTreeNode<K,V> ) {
         var node : RedBlackTreeNode<K,V>? = node1
         var uncle : RedBlackTreeNode<K,V>?
+         /*  If the parent is red, the uncle is red, the grandfather is black,
+         *  then we do a vertex recoloring, which causes grandpa to change his color to red.
+         *  The parent of the red grandfather can be red too,
+         *  so we must check this case with a while loop
+         */
         while ( node?.parent?.isRed == true ) {
             if ( node.parent?.parent?.rightChild == node.parent ) {
                 uncle = node.parent?.parent?.leftChild
+                /*
+                 * The case of red parent, red uncle, black grandfather :
+                 * repaint the parent and uncle in black, grandfather in red.
+                 * Then we consider the grandfather as a node to make sure
+                 * that its parent is not red (while loop)
+                 */
                 if ( uncle?.isRed != null && uncle.isRed ) {
                     uncle.isRed = false
                     node.parent?.isRed = false
                     node.parent?.parent?.isRed = true
                     node = node.parent?.parent
                 }
-                else {
+                // The case of red parent, black uncle, black grandfather
+                else { // If the node and its parent are not on the same side, then we move them to the same side using rotation
                     if ( node == node.parent?.leftChild ) {
                         node = node.parent
                         rightRotate(node!!)
-                    }
+                    }// then execute tree balancing
                     node.parent?.isRed = false
                     node.parent?.parent?.isRed = true
                     leftRotate(node.parent?.parent!!)
                 }
-            } else {
+            } else { // execute the same algorithm, but for the case when the uncle is the left child for the grandfather
                 uncle  = node.parent?.parent?.rightChild
                 if ( uncle?.isRed != null && uncle.isRed ) {
                     uncle.isRed = false
@@ -191,35 +208,49 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
                     rightRotate( node.parent?.parent!!)
                 }
             }
-            if (node == root) {
+            if (node == root) { // break the while loop, if the root is reached
                 break
             }
         }
-        root?.isRed = false
+        root?.isRed = false // the root is always black
     }
 
+    /**
+     * The method returns the root value after inserting the node wiht following key and value parameters
+     * @param K comparable type: key of the node to be inserted
+     * @param V type: value of the node to be inserted
+     */
     override fun insert(key: K, value: V) {
         root = insert(root, key, value)
         root?.isRed = false
     }
+
+    /**
+     * Searching the insertion place and considering the insertion of the root/children of the root
+     * Return the value of the root after inserting
+     */
     private fun insert(treeRoot: RedBlackTreeNode<K, V>?, key: K, value: V): RedBlackTreeNode<K, V>? {
         val node = RedBlackTreeNode(key, value)
         node.isRed = true
         var x: RedBlackTreeNode<K, V>? = treeRoot
         var y: RedBlackTreeNode<K, V>? = null
-        while (x != null) {
+        while (x != null) { // searching the place to insert the node
             y = x
             x = if (key < x.key) {
                 x.leftChild
             } else if (key > x.key) {
                 x.rightChild
-            } else if ( x.key == key && x.value == value) {
+            } else if ( x.key == key && x.value == value) { // case of the existence of the node in the tree
                 throw IllegalArgumentException("The key: $key and value: $value already exists in the tree.")
             } else {
                 throw IllegalArgumentException("The key: $key already exists in the tree.")
             }
         }
         node.parent = y
+        /*
+         * the cases of filling the first and second
+         * levels of the tree ( the root and its children )
+         */
         if (y == null) {
             node.isRed = false
             root = node
@@ -234,6 +265,10 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
                 return root
             }
         }
+        /*
+         * if the place where we insert the node is not the root or its children,
+         * then we execute balancing of the tree by fixInsert
+         */
         fixInsert( node )
         return root
     }
