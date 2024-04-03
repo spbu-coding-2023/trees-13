@@ -1,8 +1,10 @@
+[![Kotlin 1.9.23][kotlin_img]][kotlin_releases_url]
+[![License][license_img]][repo_license_url]
 ## Implementation of binary search trees in the Kotlin programming language
 
 * Binary search tree
 * AVL tree
-* Red and black tree
+* Red-Black tree
 
 ## Description of the tree interface
 
@@ -55,7 +57,7 @@ avlTree.insert(listOf(1 to "one", 2 to "two", 3 to "three", 4 to "four", 5 to "f
 val keyRemove = avlTree.getMaxKey()
 avlTree.remove(keyRemove!!)
 for(i in avlTree.getValues()) {
-println(i)
+  println(i)
 }
 ```
 Output:
@@ -76,7 +78,7 @@ tree.insert(50, "lemon")
 val keyRemove = tree.getMinKey()
 tree.remove(keyRemove!!)
 for(i in tree.getKeys()) {
-println(i)
+  println(i)
 }
 println(tree.search(65))
 tree.replaceValue(65, "orange")
@@ -91,10 +93,42 @@ apricot
 orange
 ```
 
+### Example of use on an Red-Black tree:
+```
+val rbTree = RedBlackTreeSearch<Int, String>()
+rbTree.insert(1, "bicycle")
+rbTree.insert(2, "motorcycle")
+rbTree.insert(3, "car")
+rbTree.insert(4, "ship")
+rbTree.insert(5, "plane")
+rbTree.remove(6)
+```
+Output:
+```
+Exception in thread "main" java.util.NoSuchElementException: The key: 6 was not found in the tree.
+...
+```
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.<br>
+
 ## Status
-❤️ Red-black tree in development<br>
+
+❤️ All trees and tests are implemented<br>
+
+## Contact
+
+Telegram - @Pirodjochek
+
 ## Authors:
 
 * Nabieva Liya♡
 * Ekaterina Tenyaeva♡
 * Anastasia Migunova♡
+
+<!-- links -->
+
+[kotlin_img]: https://img.shields.io/badge/Kotlin-%201.9.22-magenta
+[license_img]: https://img.shields.io/badge/license-MIT-blue
+[kotlin_releases_url]: https://kotlinlang.org/docs/releases.html#release-details
+[repo_license_url]: https://github.com/spbu-coding-2023/trees-13/blob/main/LICENSE
