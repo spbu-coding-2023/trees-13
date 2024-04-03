@@ -101,6 +101,14 @@ class AVLTreeSearchTest {
         avlTree.remove(5)
         assertEquals(listOf("Value2", "Value3", "Value4", "Value6", "Value7", "Value8"), avlTree.getValues())
     }
+    // CLEAN TEST
+    @Test
+    fun `clean should succeed`() {
+        val tree = AVLTreeSearch<Int, Int>()
+        tree.insert(listOf(0 to 1, 1 to 2, 10 to 3, 15 to 4, 100 to 5, 5 to 6))
+        tree.clean()
+        assertEquals(listOf<Int>(), tree.getKeys())
+    }
 }
 
 class AVLTreeMethodTest {

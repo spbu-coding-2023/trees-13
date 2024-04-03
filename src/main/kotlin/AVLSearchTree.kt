@@ -97,8 +97,7 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
              *  if at least one child is zero,
              *  then we return either one of the children or zero*/
             if (newRoot.leftChild == null || newRoot.rightChild == null) {
-                var temp: AVLTreeNode<K, V>? = null
-                temp = newRoot.leftChild ?: newRoot.rightChild
+                val temp = newRoot.leftChild ?: newRoot.rightChild
                 if (temp == null) {
                     return null
                 } else {
