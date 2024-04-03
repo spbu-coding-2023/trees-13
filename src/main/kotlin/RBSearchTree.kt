@@ -54,10 +54,9 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
     private fun balanceRemove(node: RedBlackTreeNode<K, V>) {
         val parent = node.parent ?: return
         val bro = if (parent.leftChild == node) parent.rightChild else parent.leftChild
-        if (bro == null) {
-            return
-        }
-        if (bro.isRed) { //if brother is red, change his color
+        /** always, when we call balancing, the node has a brother
+         * that is not equal to null (otherwise the tree would not be balanced) */
+        if (bro!!.isRed) { //if brother is red, change his color
             bro.isRed = false
             parent.isRed = true
             leftRotate(parent)
@@ -132,10 +131,12 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
              * with this child and adjust the color */
             if (node.leftChild == null) {
                 node.rightChild!!.isRed = false
+                node.rightChild!!.parent = node.parent
                 return node.rightChild
             }
             if (node.rightChild == null) {
                 node.leftChild!!.isRed = false
+                node.leftChild!!.parent = node.parent
                 return node.leftChild
             }
             /** if the node to be deleted has 2 children,

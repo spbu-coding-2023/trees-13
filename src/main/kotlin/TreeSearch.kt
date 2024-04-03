@@ -9,6 +9,7 @@ interface TreeInterface<K : Comparable<K>, V> {
     fun insert(list: List<Pair<K, V>>)
     fun remove(list: List<K>)
     fun replaceValue(key: K, newValue: V)
+    fun clean()
 }
 
 abstract class TreeNode<K, V, N: TreeNode<K, V, N>> (var key: K, var value: V) {
@@ -102,5 +103,10 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
         val result = search(root, key) ?: throw NoSuchElementException("The key: $key was not found in the tree.")
         result.value = newValue
+    }
+    override fun clean() {
+        for (i in getKeys()) {
+            remove(i)
+        }
     }
 }

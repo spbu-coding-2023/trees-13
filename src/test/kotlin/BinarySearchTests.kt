@@ -83,6 +83,14 @@ class TreeSearchWithBinaryTest {
         tree.insert(10, 5)
         assertFailsWith<NoSuchElementException> {tree.replaceValue(20, 2)}
     }
+    // CLEAN TEST
+    @Test
+    fun `clean should succeed`() {
+        val tree = BinaryTreeSearch<Int, Int>()
+        tree.insert(listOf(0 to 1, 1 to 2, 10 to 3, 15 to 4, 100 to 5, 5 to 6))
+        tree.clean()
+        assertEquals(listOf<Int>(), tree.getKeys())
+    }
 }
 
 class BinaryTreeSearchTest {
