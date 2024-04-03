@@ -33,6 +33,7 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         }
         return search(root.rightChild, key)
     }
+
     override fun getValues(): List<V> {
         val values = mutableListOf<V>()
         inOrderTraversal(root) { values.add(it.value) }
@@ -49,10 +50,12 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         action(root)
         inOrderTraversal(root.rightChild, action)
     }
+
     override fun getMaxKey(): K? {
         return getMaxKey(root)
     }
     private fun getMaxKey(root: N?): K? {
+        // maximal key is the rightmost key
         if (root == null) {
             return null
         }
@@ -61,10 +64,12 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         }
         return getMaxKey(root.rightChild)
     }
+
     override fun getMinKey(): K? {
         return getMinKey(root)
     }
     private fun getMinKey(root: N?): K? {
+        // minimal key is the leftmost key
         if (root == null) {
             return null
         }
@@ -73,13 +78,16 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         }
         return getMinKey(root.leftChild)
     }
-    protected fun minNode(root: N): N {
-        var current = root
+
+    protected fun minNode(node: N): N {
+        // minimal node is the leftmost node
+        var current = node
         while (current.leftChild != null) {
             current = current.leftChild!!
         }
         return current
     }
+
     override fun insert(list: List<Pair<K, V>>) {
         for (i in list) {
             insert(i.first, i.second)
@@ -91,10 +99,8 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         }
     }
     override fun replaceValue(key: K, newValue: V) {
-        val result = search(root, key)
-        if (result == null) {
-            throw NoSuchElementException("The key: $key was not found in the tree.")
-        }
+        //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
+        val result = search(root, key) ?: throw NoSuchElementException("The key: $key was not found in the tree.")
         result.value = newValue
     }
 }

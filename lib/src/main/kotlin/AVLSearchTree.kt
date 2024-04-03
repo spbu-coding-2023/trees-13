@@ -1,9 +1,13 @@
+/** use height for balance tree. The tree is self-balancing
+ *  because the difference between the height of the left and right subtree is -1, 0 or +1.*/
 class AVLTreeNode<K: Comparable<K>, V> (key: K, value: V) : TreeNode<K, V, AVLTreeNode<K, V>> (key, value) {
     var height = 1
 }
 
 class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>() {
     private fun insert(root: AVLTreeNode<K, V>?, key: K, value: V): AVLTreeNode<K, V> {
+        /**walk through the tree until
+         * we find the zero vertex where we will place the new element*/
         if (root == null) return AVLTreeNode(key, value)
         if (key < root.key) root.leftChild = insert(root.leftChild, key, value)
         else if (key > root.key) root.rightChild = insert(root.rightChild, key, value)
@@ -15,6 +19,9 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         updateHeight(root)
         val balance = balanceFactor(root)
         if (balance > 1) {
+            /**the advantage on the left,
+             * depending on whether the lower vertex is on the left or on the right,
+             * the balancing depends*/
             if (key > root.rightChild!!.key) {
                 return rightRotate(root)
             } else {
@@ -23,6 +30,7 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
             }
         }
         if (balance < -1) {
+            /**the advantage on the right*/
             if (key < root.leftChild!!.key) {
                 return leftRotate(root)
             } else {
@@ -38,6 +46,7 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
     }
 
     private fun height(root: AVLTreeNode<K, V>?): Int {
+        /**if the vertex is empty, returns 0*/
         return root?.height ?: 0
     }
 
@@ -83,6 +92,10 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         } else if (key > newRoot.key) {
             newRoot.rightChild = remove(newRoot.rightChild, key)
         } else {
+            /** when we find a vertex,
+             *  we check its children,
+             *  if at least one child is zero,
+             *  then we return either one of the children or zero*/
             if (newRoot.leftChild == null || newRoot.rightChild == null) {
                 var temp: AVLTreeNode<K, V>? = null
                 temp = newRoot.leftChild ?: newRoot.rightChild
@@ -92,6 +105,11 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
                     newRoot = temp
                 }
             } else {
+                /**After removal,
+                 * we restructure the tree if necessary to maintain its balanced height.
+                 * we took the minimum element from the right. vertex,
+                 * assigned it to the vertex that we want to delete
+                 * and delete the extra element that we found*/
                 val temp = minNode(newRoot.rightChild!!)
                 newRoot.key = temp.key
                 newRoot.value = temp.value
