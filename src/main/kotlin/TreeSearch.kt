@@ -18,7 +18,7 @@ abstract class TreeNode<K, V, N: TreeNode<K, V, N>> (var key: K, var value: V) {
 }
 
 abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInterface<K, V> {
-    var root: N? = null
+    internal var root: N? = null
     override fun search(key: K): V? {
         return search(root, key)?.value
     }
