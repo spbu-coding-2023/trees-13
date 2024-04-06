@@ -35,11 +35,14 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         return search(root.rightChild, key)
     }
 
+    // values are written in ascending order of the key
     override fun getValues(): List<V> {
         val values = mutableListOf<V>()
         inOrderTraversal(root) { values.add(it.value) }
         return values
     }
+
+    // keys are written in ascending order
     override fun getKeys(): List<K> {
         val keys = mutableListOf<K>()
         inOrderTraversal(root) { keys.add(it.key) }
