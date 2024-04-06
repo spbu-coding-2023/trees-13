@@ -56,10 +56,13 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
         val sibling = if (parent.leftChild == node) parent.rightChild else parent.leftChild
         /** always, when we call balancing, the node has a brother
          * that is not equal to null (otherwise the tree would not be balanced) */
-        if (sibling!!.isRed) { //if brother is red, change his color
-            sibling.isRed = false
-            parent.isRed = true
-            leftRotate(parent)
+        if (sibling == null) {
+          throw RuntimeException("Tree invalid balanced")
+        }
+        if (sibling.isRed) { //if brother is red, change his color
+          sibling.isRed = false
+          parent.isRed = true
+          leftRotate(parent)
         }
         else {
             //if brother is black and without child
