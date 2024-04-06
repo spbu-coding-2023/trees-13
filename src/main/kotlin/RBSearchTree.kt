@@ -53,20 +53,23 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
 
     private fun balanceRemove(node: RedBlackTreeNode<K, V>) {
         val parent = node.parent ?: return
-        val bro = if (parent.leftChild == node) parent.rightChild else parent.leftChild
+        val sibling = if (parent.leftChild == node) parent.rightChild else parent.leftChild
         /** always, when we call balancing, the node has a brother
          * that is not equal to null (otherwise the tree would not be balanced) */
-        if (bro!!.isRed) { //if brother is red, change his color
-            bro.isRed = false
-            parent.isRed = true
-            leftRotate(parent)
+        if (sibling == null) {
+          throw RuntimeException("Tree invalid balanced")
+        }
+        if (sibling.isRed) { //if brother is red, change his color
+          sibling.isRed = false
+          parent.isRed = true
+          leftRotate(parent)
         }
         else {
             //if brother is black and without child
-            if (bro.leftChild == null && bro.rightChild == null) {
+            if (sibling.leftChild == null && sibling.rightChild == null) {
                 //the node has a red parent, adjust the color
                 if (parent.isRed) {
-                    bro.isRed = true
+                    sibling.isRed = true
                     parent.isRed = false
                 }
                 //the node has a black non-root parent, adjust the color or left rotation
@@ -76,23 +79,23 @@ class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
                 }
                 //the node has a root parent, adjust the color
                 else {
-                    bro.isRed = true
+                    sibling.isRed = true
                 }
             }
             /** if the brother’s right child is red,
              * the left one is any, then adjust the colors and make a left turn */
-            else if (bro.rightChild != null && bro.rightChild!!.isRed) {
-                bro.isRed = bro.parent!!.isRed
-                bro.rightChild!!.isRed = false
+            else if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
+                sibling.isRed = sibling.parent!!.isRed
+                sibling.rightChild!!.isRed = false
                 parent.isRed = false
                 leftRotate(parent)
             }
             /** if the brother's left child is red,
              * then adjust the colors and make a right turn and balance again */
-            else if (bro.leftChild != null && bro.leftChild!!.isRed) {
-                bro.leftChild!!.isRed = false
-                bro.isRed = true
-                rightRotate(bro)
+            else if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
+                sibling.leftChild!!.isRed = false
+                sibling.isRed = true
+                rightRotate(sibling)
                 balanceRemove(node)
             }
         }

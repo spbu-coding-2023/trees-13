@@ -35,11 +35,14 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         return search(root.rightChild, key)
     }
 
+    // values are written in ascending order of the key
     override fun getValues(): List<V> {
         val values = mutableListOf<V>()
         inOrderTraversal(root) { values.add(it.value) }
         return values
     }
+
+    // keys are written in ascending order
     override fun getKeys(): List<K> {
         val keys = mutableListOf<K>()
         inOrderTraversal(root) { keys.add(it.key) }
@@ -55,8 +58,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
     override fun getMaxKey(): K? {
         return getMaxKey(root)
     }
+
+    // maximal key is the rightmost key
     private fun getMaxKey(root: N?): K? {
-        // maximal key is the rightmost key
         if (root == null) {
             return null
         }
@@ -69,8 +73,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
     override fun getMinKey(): K? {
         return getMinKey(root)
     }
+
+    // minimal key is the leftmost key
     private fun getMinKey(root: N?): K? {
-        // minimal key is the leftmost key
         if (root == null) {
             return null
         }
@@ -80,13 +85,12 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         return getMinKey(root.leftChild)
     }
 
+    // minimal node is the leftmost node
     protected fun minNode(node: N): N {
-        // minimal node is the leftmost node
-        var current = node
-        while (current.leftChild != null) {
-            current = current.leftChild!!
-        }
-        return current
+        var nodeCurrent = node
+        while (true)
+          nodeCurrent = nodeCurrent.leftChild ?: break
+        return nodeCurrent
     }
 
     override fun insert(list: List<Pair<K, V>>) {
@@ -99,8 +103,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
             remove(i)
         }
     }
+
+    //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
     override fun replaceValue(key: K, newValue: V) {
-        //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
         val result = search(root, key) ?: throw NoSuchElementException("The key: $key was not found in the tree.")
         result.value = newValue
     }
