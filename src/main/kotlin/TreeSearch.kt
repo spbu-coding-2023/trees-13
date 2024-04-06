@@ -55,8 +55,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
     override fun getMaxKey(): K? {
         return getMaxKey(root)
     }
+
+    // maximal key is the rightmost key
     private fun getMaxKey(root: N?): K? {
-        // maximal key is the rightmost key
         if (root == null) {
             return null
         }
@@ -69,8 +70,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
     override fun getMinKey(): K? {
         return getMinKey(root)
     }
+
+    // minimal key is the leftmost key
     private fun getMinKey(root: N?): K? {
-        // minimal key is the leftmost key
         if (root == null) {
             return null
         }
@@ -80,8 +82,8 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         return getMinKey(root.leftChild)
     }
 
+    // minimal node is the leftmost node
     protected fun minNode(node: N): N {
-        // minimal node is the leftmost node
         var nodeCurrent = node
         while (true)
           nodeCurrent = nodeCurrent.leftChild ?: break
@@ -98,8 +100,9 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
             remove(i)
         }
     }
+
+    //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
     override fun replaceValue(key: K, newValue: V) {
-        //if the key is in the tree, we look for it and change the value, otherwise we throw an exception
         val result = search(root, key) ?: throw NoSuchElementException("The key: $key was not found in the tree.")
         result.value = newValue
     }
