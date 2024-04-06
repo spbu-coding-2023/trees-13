@@ -54,9 +54,9 @@ class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K,
                 /** if the node to be deleted has 2 children,
                  * then we look for the leftmost child of the right subtree
                  * and put it instead of the node to be deleted, and delete the node */
-                val temp =  minNode(node.rightChild!!)
-                node.key = temp.key
-                node.value = temp.value
+                val tempNode =  minNode(node.rightChild!!)
+                node.key = tempNode.key
+                node.value = tempNode.value
                 node.rightChild = remove(node.rightChild, node.key)
             }
         }
