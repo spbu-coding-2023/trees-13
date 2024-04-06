@@ -82,11 +82,10 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
 
     protected fun minNode(node: N): N {
         // minimal node is the leftmost node
-        var current = node
-        while (current.leftChild != null) {
-            current = current.leftChild!!
-        }
-        return current
+        var nodeCurrent = node
+        while (true)
+          nodeCurrent = nodeCurrent.leftChild ?: break
+        return nodeCurrent
     }
 
     override fun insert(list: List<Pair<K, V>>) {
