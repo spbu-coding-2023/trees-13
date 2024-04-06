@@ -15,7 +15,6 @@ class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K,
         if (node.key == key) {
             throw IllegalArgumentException("The key: $key already exists in the tree.")
         }
-        //search a place to insert the key
         if (key > node.key) {
             node.rightChild = insert(node.rightChild, key, value)
         }
@@ -33,7 +32,6 @@ class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K,
         if (node == null) {
             throw NoSuchElementException("The key: $key was not found in the tree.")
         }
-        //search for the key to be deleted
         else if (node.key < key) {
             node.rightChild = remove(node.rightChild, key)
         }
@@ -48,9 +46,6 @@ class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K,
             if (nodeLeft == null || nodeRight == null)
               return nodeLeft ?: nodeRight
             else {
-              /** if the node to be deleted has 2 children,
-               * then we look for the leftmost child of the right subtree
-               * and put it instead of the node to be deleted, and delete the node */
               val nodeTemp = minNode(nodeRight)
               node.key = nodeTemp.key
               node.value = nodeTemp.value
