@@ -15,31 +15,38 @@ N - the node type of the tree<br>
 
 `TreeInterface<K : Comparable<K>, V>` defines the basic operations for working with search trees:
 
-✭ `search(key: K): V?` - search for a value by key
-- If it does not find the key in the tree, it returns null.<br>
+✭ `search(key: K): V?` - searches for values ​​by key.
+- If the key is found, it returns its value.<br>
+- If the key is not found returns null.<br>
 
-✭ `insert(key: K, value: V)` - insert a new element into the tree.
-- If the value or the value and the key match, an exception is thrown.<br>
+✭ `insert(key: K, value: V)` - inserts a new key with the specified value into the tree.
+- If such a key already exists in the tree, an exception: "IllegalArgumentException" is thrown.<br>
+- If such a key and value pair already exists in the tree, an exception: "IllegalArgumentException" is thrown.<br>
 
-✭ `remove(key: K)` - deleting an element by key.
-- If the key is not found in the tree, an exception is thrown.<br>
+✭ `remove(key: K)` - removes the specified key from the tree
+- If the key is not found in the tree, an exception: "NoSuchElementException" is thrown.<br>
 
-✭ `getKeys(): List<K>` - getting a list of all keys in the tree.
-- If the tree is empty, it returns nothing.<br>
+✭ `getKeys(): List<K>` - gets a list of all keys in ascending order.
+- Returns a list of keys<br>
+- If the tree is empty, it returns empty list.<br>
 
-✭ `getValues(): List<V>` - getting a list of all values in the tree.
-- If the tree is empty, it returns nothing.<br>
+✭ `getValues(): List<V>` - gets a list of all values ​​in ascending order of their corresponding keys.
+- Returns a list of values<br>
+- If the tree is empty, it returns empty list.<br>
 
-✭ `getMinKey(): K?` - getting the maximum key in the tree.
+✭ `getMinKey(): K?` - gets the minimum key in the tree
+- Returns the minimum key in the tree<br>
 - If the tree is empty, returns null.<br>
 
-✭ `getMaxKey(): K?` - getting the minimum key in the tree.
+✭ `getMaxKey(): K?` - gets the maximum key in the tree
+- Returns the maximum key in the tree<br>
 - If the tree is empty, returns null.<br>
 
-✭ `insert(list: List<Pair<K, V>>)` - inserts a list of items into the tree.<br>
-✭ `remove(list: List<K>)` - deletes the list of items in the tree.<br>
-✭ `replaceValue(key: K, newValue: V)` - changing the value by key in the tree
-- If the key is not in the tree, an exception is thrown<br>
+✭ `insert(list: List<Pair<K, V>>)` - inserts multiple keys and specified values ​​in the order in which they appear in the specified list.<br>
+✭ `remove(list: List<K>)` - removes multiple keys in the order in which they appear in the specified list.<br>
+✭ `replaceValue(key: K, newValue: V)` - replaces the value of the specified key with the specified one
+- If the key is not in the tree, an exception: "NoSuchElementException" is thrown<br>
+✭ `clean()` - completely clears the entire tree, removing all keys<br>
 
 ## Technologies
 
