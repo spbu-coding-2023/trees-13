@@ -1,7 +1,7 @@
 class BinaryTreeNode<K, V> (key: K,value: V): TreeNode<K, V, BinaryTreeNode<K, V>> (key, value) {
 }
 
-class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K, V>>() {
+class BinarySearchTree<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K, V>>() {
     override fun insert(key: K, value: V) {
         root = insert(root, key, value)
     }
