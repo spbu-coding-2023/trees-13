@@ -118,7 +118,9 @@ Distributed under the MIT License. See `LICENSE` for more information.<br>
 
 ## Contact
 
-Telegram - @Pirodjochek
+* @Kirilich
+* @b08lsoai
+* @MigunovaAnastasia1
 
 ## Authors:
 
