@@ -125,8 +125,8 @@ Distributed under the MIT License. See `LICENSE` for more information.<br>
 ## Authors:
 
 * Nabieva Liya♡
-* Ekaterina Tenyaeva♡
-* Anastasia Migunova♡
+* Tenyaeva Ekaterina♡
+* Migunova Anastasia♡
 
 <!-- links -->
 
