@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 
-class RedBlackTreeSearchTest {
+class RedBlackSearchTreeTest {
   //LEFT ROTATE TEST
   @Test
   fun `leftRotate should rotate tree to the left correctly in insert`() {
