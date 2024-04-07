@@ -51,7 +51,7 @@ Kotest Runner for JUnit 5 (JVM)<br>
 ## Launch
 
 ### Example of use on an AVL tree:
-```
+```kotlin
 val avlTree = AVLTreeSearch<Int, String>()
 avlTree.insert(listOf(1 to "one", 2 to "two", 3 to "three", 4 to "four", 5 to "five"))
 val keyRemove = avlTree.getMaxKey()
@@ -61,7 +61,7 @@ for(i in avlTree.getValues()) {
 }
 ```
 Output:
-```
+```text
 one
 two
 three
@@ -69,7 +69,7 @@ four
 ```
 
 ### Example of use on an Binary tree:
-```
+```kotlin
 val tree = BinaryTreeSearch<Int, String>()
 tree.insert(45, "apple")
 tree.insert(30, "banana")
@@ -85,7 +85,7 @@ tree.replaceValue(65, "orange")
 println(tree.search(65))
 ```
 Output:
-```
+```text
 45
 50
 65
@@ -94,7 +94,7 @@ orange
 ```
 
 ### Example of use on an Red-Black tree:
-```
+```kotlin
 val rbTree = RedBlackTreeSearch<Int, String>()
 rbTree.insert(1, "bicycle")
 rbTree.insert(2, "motorcycle")
@@ -104,7 +104,7 @@ rbTree.insert(5, "plane")
 rbTree.remove(6)
 ```
 Output:
-```
+```text
 Exception in thread "main" java.util.NoSuchElementException: The key: 6 was not found in the tree.
 ...
 ```
