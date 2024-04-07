@@ -110,7 +110,7 @@ Exception in thread "main" java.util.NoSuchElementException: The key: 6 was not 
 ```
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.<br>
+Distributed under the [MIT License](https://choosealicense.com/licenses/mit/). See [`LICENSE`](LICENSE) for more information.<br>
 
 ## Status
 
