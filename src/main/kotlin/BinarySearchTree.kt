@@ -18,7 +18,7 @@ class BinaryTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, BinaryTreeNode<K,
         if (key > node.key) {
             node.rightChild = insert(node.rightChild, key, value)
         }
-        else if (key < node.key) {
+        else {
             node.leftChild = insert(node.leftChild, key, value)
         }
         return node
