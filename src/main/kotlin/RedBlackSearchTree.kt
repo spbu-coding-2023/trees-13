@@ -76,6 +76,7 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
                 else if (parent.parent != null) {
                     parent.isRed = true
                     leftRotate(parent)
+                    balanceRemove(sibling)
                 }
                 //the node has a root parent, adjust the color
                 else {
