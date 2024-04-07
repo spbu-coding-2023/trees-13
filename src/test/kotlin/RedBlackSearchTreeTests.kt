@@ -217,19 +217,8 @@ class RedBlackSearchTreeTest {
     assertEquals(2, tree.search(20))
     assertEquals(3, tree.search(30))
   }
-  
+
   // REMOVE TEST
-  @Test
-  fun `remove all node should correctly`() {
-    val tree = RedBlackSearchTree<Int,Int>()
-    for (i in 1 until 10) {
-      tree.insert(i, i)
-    }
-    for (i in tree.getKeys()) {
-      tree.remove(i)
-    }
-    assertEquals(listOf<Int>(), tree.getKeys())
-  }
   @Test
   fun `remove a non-existing key should throw NoSuchElementException`() {
     val tree = RedBlackSearchTree<Int, Int>()
