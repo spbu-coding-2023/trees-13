@@ -118,9 +118,9 @@ Distributed under the MIT License. See `LICENSE` for more information.<br>
 
 ## Contact
 
-* @Kirilich
-* @b08lsoai
-* @MigunovaAnastasia1
+* [@Kirilich](https://github.com/Kirilich)
+* [@b08lsoai](https://github.com/b08lsoai)
+* [@MigunovaAnastasia1](https://github.com/MigunovaAnastasia1)
 
 ## Authors:
 
