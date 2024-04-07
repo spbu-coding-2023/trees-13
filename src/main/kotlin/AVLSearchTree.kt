@@ -2,6 +2,7 @@
  *  because the difference between the height of the left and right subtree is -1, 0 or +1.*/
 class AVLTreeNode<K: Comparable<K>, V> (key: K, value: V) : TreeNode<K, V, AVLTreeNode<K, V>> (key, value) {
     var height = 1
+
 }
 
 class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>() {
@@ -21,21 +22,21 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         if (balance > 1) {
             /**the advantage on the left,
              * depending on whether the lower vertex is on the left or on the right,
-             * the balancing depends*/
+             * the balancing depends on*/
             if (key > root.rightChild!!.key) {
-                return rightRotate(root)
+                return leftRotate(root)
             } else {
-                root.rightChild = leftRotate(root.rightChild!!)
-                return rightRotate(root)
+                root.rightChild = rightRotate(root.rightChild!!)
+                return leftRotate(root)
             }
         }
         if (balance < -1) {
             /**the advantage on the right*/
             if (key < root.leftChild!!.key) {
-                return leftRotate(root)
+                return rightRotate(root)
             } else {
-                root.leftChild = rightRotate(root.leftChild!!)
-                return leftRotate(root)
+                root.leftChild = leftRotate(root.leftChild!!)
+                return rightRotate(root)
             }
         }
         return root
@@ -45,34 +46,27 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         root = insert(root, key, value)
     }
 
-    private fun height(root: AVLTreeNode<K, V>?): Int {
-        /**if the vertex is empty, returns 0*/
-        return root?.height ?: 0
-    }
-
     private fun balanceFactor(root: AVLTreeNode<K, V>): Int {
-        return height(root.rightChild) - height(root.leftChild) // key??
+        return (root.rightChild?.height ?: 0) - (root.leftChild?.height ?: 0)
     }
 
     private fun updateHeight(root: AVLTreeNode<K, V>) {
-        root.height = maxOf(height(root.leftChild), height(root.rightChild)) + 1
+        root.height = maxOf((root.leftChild?.height ?: 0), (root.rightChild?.height ?: 0)) + 1
     }
 
-    private fun leftRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
+    private fun rightRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
         val x = root.leftChild!!
-        val t2 = x.rightChild
+        root.leftChild = x.rightChild
         x.rightChild = root
-        root.leftChild = t2
         updateHeight(root)
         updateHeight(x)
         return x
     }
 
-    private fun rightRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
+    private fun leftRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
         val y = root.rightChild!!
-        val t2 = y.leftChild
+        root.rightChild = y.leftChild
         y.leftChild = root
-        root.rightChild = t2
         updateHeight(root)
         updateHeight(y)
         return y
@@ -119,18 +113,18 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         val balance = balanceFactor(newRoot)
         if (balance > 1) {
             if (balanceFactor(newRoot.rightChild!!) >= 0) {
-                return rightRotate(newRoot)
+                return leftRotate(newRoot)
             } else {
-                newRoot.rightChild = leftRotate(newRoot.rightChild!!)
-                return rightRotate(newRoot)
+                newRoot.rightChild = rightRotate(newRoot.rightChild!!)
+                return leftRotate(newRoot)
             }
         }
         if (balance < -1) {
             if (balanceFactor(newRoot.leftChild!!) <= 0) {
-                return leftRotate(newRoot)
+                return rightRotate(newRoot)
             } else {
-                newRoot.leftChild = rightRotate(newRoot.leftChild!!)
-                return leftRotate(newRoot)
+                newRoot.leftChild = leftRotate(newRoot.leftChild!!)
+                return rightRotate(newRoot)
             }
         }
         return newRoot
