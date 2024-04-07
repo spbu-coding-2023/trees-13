@@ -55,7 +55,7 @@ Kotest Runner for JUnit 5 (JVM)<br>
 val avlTree = AVLTreeSearch<Int, String>()
 avlTree.insert(listOf(1 to "one", 2 to "two", 3 to "three", 4 to "four", 5 to "five"))
 val keyRemove = avlTree.getMaxKey()
-avlTree.remove(keyRemove!!)
+avlTree.remove(keyRemove)
 for(i in avlTree.getValues()) {
   println(i)
 }
@@ -76,7 +76,7 @@ tree.insert(30, "banana")
 tree.insert(65, "apricot")
 tree.insert(50, "lemon")
 val keyRemove = tree.getMinKey()
-tree.remove(keyRemove!!)
+tree.remove(keyRemove)
 for(i in tree.getKeys()) {
   println(i)
 }
