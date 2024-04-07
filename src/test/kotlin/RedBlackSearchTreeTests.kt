@@ -3,65 +3,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 
 class RedBlackSearchTreeTest {
-  //LEFT ROTATE TEST
-  @Test
-  fun `leftRotate should rotate tree to the left correctly in insert`() {
-    val tree = RedBlackSearchTree<Int, Int>()
-    tree.insert(10, 1)
-    tree.insert(20, 2)
-    tree.insert(30, 3)
-    assertEquals(20, tree.root!!.key)
-    assertEquals(10, tree.root!!.leftChild!!.key)
-    assertEquals(30, tree.root!!.rightChild!!.key)
-    assertEquals(1, tree.search(10))
-    assertEquals(2, tree.search(20))
-    assertEquals(3, tree.search(30))
-  }
-
-  // RIGHT ROTATE TEST
-  @Test
-  fun `rightRotate should rotate tree to the right correctly in insert`() {
-    val tree = RedBlackSearchTree<Int, Int>()
-    tree.insert(30, 3)
-    tree.insert(20, 2)
-    tree.insert(10, 1)
-    assertEquals(20, tree.root?.key)
-    assertEquals(10, tree.root?.leftChild?.key)
-    assertEquals(30, tree.root?.rightChild?.key)
-    assertEquals(1, tree.search(10))
-    assertEquals(2, tree.search(20))
-    assertEquals(3, tree.search(30))
-  }
-
-  //RIGHT-LEFT ROTATE
-  @Test
-  fun `right-left rotate should rotate tree to the right correctly in insert`() {
-    val tree = RedBlackSearchTree<Int, Int>()
-    tree.insert(10, 1)
-    tree.insert(30, 3)
-    tree.insert(20, 2)
-    assertEquals(20, tree.root?.key)
-    assertEquals(10, tree.root?.leftChild?.key)
-    assertEquals(30, tree.root?.rightChild?.key)
-    assertEquals(1, tree.search(10))
-    assertEquals(2, tree.search(20))
-    assertEquals(3, tree.search(30))
-  }
-
-  // LEFT-RIGHT ROTATE TEST
-  @Test
-  fun `left-right rotate should rotate tree to the right correctly in insert`() {
-    val tree = RedBlackSearchTree<Int, Int>()
-    tree.insert(30, 3)
-    tree.insert(10, 1)
-    tree.insert(20, 2)
-    assertEquals(20, tree.root?.key)
-    assertEquals(10, tree.root?.leftChild?.key)
-    assertEquals(30, tree.root?.rightChild?.key)
-    assertEquals(1, tree.search(10))
-    assertEquals(2, tree.search(20))
-    assertEquals(3, tree.search(30))
-  }
   // INSERT TEST
   @Test
   fun `insertion with existing key should throw IllegalArgumentException`() {
@@ -216,6 +157,67 @@ class RedBlackSearchTreeTest {
     assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.value, "node6")
     assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.isRed, true)
   }
+
+  //LEFT ROTATE TEST
+  @Test
+  fun `leftRotate should rotate tree to the left correctly in insert`() {
+    val tree = RedBlackSearchTree<Int, Int>()
+    tree.insert(10, 1)
+    tree.insert(20, 2)
+    tree.insert(30, 3)
+    assertEquals(20, tree.root!!.key)
+    assertEquals(10, tree.root!!.leftChild!!.key)
+    assertEquals(30, tree.root!!.rightChild!!.key)
+    assertEquals(1, tree.search(10))
+    assertEquals(2, tree.search(20))
+    assertEquals(3, tree.search(30))
+  }
+
+  // RIGHT ROTATE TEST
+  @Test
+  fun `rightRotate should rotate tree to the right correctly in insert`() {
+    val tree = RedBlackSearchTree<Int, Int>()
+    tree.insert(30, 3)
+    tree.insert(20, 2)
+    tree.insert(10, 1)
+    assertEquals(20, tree.root?.key)
+    assertEquals(10, tree.root?.leftChild?.key)
+    assertEquals(30, tree.root?.rightChild?.key)
+    assertEquals(1, tree.search(10))
+    assertEquals(2, tree.search(20))
+    assertEquals(3, tree.search(30))
+  }
+
+  //RIGHT-LEFT ROTATE
+  @Test
+  fun `right-left rotate should rotate tree to the right correctly in insert`() {
+    val tree = RedBlackSearchTree<Int, Int>()
+    tree.insert(10, 1)
+    tree.insert(30, 3)
+    tree.insert(20, 2)
+    assertEquals(20, tree.root?.key)
+    assertEquals(10, tree.root?.leftChild?.key)
+    assertEquals(30, tree.root?.rightChild?.key)
+    assertEquals(1, tree.search(10))
+    assertEquals(2, tree.search(20))
+    assertEquals(3, tree.search(30))
+  }
+
+  // LEFT-RIGHT ROTATE TEST
+  @Test
+  fun `left-right rotate should rotate tree to the right correctly in insert`() {
+    val tree = RedBlackSearchTree<Int, Int>()
+    tree.insert(30, 3)
+    tree.insert(10, 1)
+    tree.insert(20, 2)
+    assertEquals(20, tree.root?.key)
+    assertEquals(10, tree.root?.leftChild?.key)
+    assertEquals(30, tree.root?.rightChild?.key)
+    assertEquals(1, tree.search(10))
+    assertEquals(2, tree.search(20))
+    assertEquals(3, tree.search(30))
+  }
+  
   // REMOVE TEST
   @Test
   fun `remove all node should correctly`() {
