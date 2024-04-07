@@ -220,6 +220,13 @@ class RedBlackSearchTreeTest {
 
   // REMOVE TEST
   @Test
+  fun `remove a black node without children and without a sibling should throw an exception`() {
+    val tree = RedBlackSearchTree<Int, Int>()
+    tree.insert(listOf(10 to 1, 5 to 2))
+    tree.root!!.leftChild!!.isRed = false
+    assertFailsWith<RuntimeException> {tree.remove(5)}
+  }
+  @Test
   fun `remove a non-existing key should throw NoSuchElementException`() {
     val tree = RedBlackSearchTree<Int, Int>()
     assertFailsWith<NoSuchElementException> {tree.remove(10)}
