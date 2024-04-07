@@ -123,8 +123,8 @@ Telegram - @Pirodjochek
 ## Authors:
 
 * Nabieva Liya♡
-* Ekaterina Tenyaeva♡
-* Anastasia Migunova♡
+* Tenyaeva Ekaterina♡
+* Migunova Anastasia♡
 
 <!-- links -->
 
