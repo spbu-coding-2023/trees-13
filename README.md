@@ -43,9 +43,12 @@ N - the node type of the tree<br>
 - If the tree is empty, returns null.<br>
 
 ✭ `insert(list: List<Pair<K, V>>)` - inserts multiple keys and specified values ​​in the order in which they appear in the specified list.<br>
+
 ✭ `remove(list: List<K>)` - removes multiple keys in the order in which they appear in the specified list.<br>
+
 ✭ `replaceValue(key: K, newValue: V)` - replaces the value of the specified key with the specified one
 - If the key is not in the tree, an exception: "NoSuchElementException" is thrown<br>
+
 ✭ `clean()` - completely clears the entire tree, removing all keys<br>
 
 ## Technologies
