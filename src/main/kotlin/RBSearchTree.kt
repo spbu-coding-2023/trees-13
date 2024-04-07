@@ -4,7 +4,7 @@ class RedBlackTreeNode<K, V> (key: K,value: V): TreeNode<K, V, RedBlackTreeNode<
     var isRed: Boolean = false
 }
 
-class RedBlackTreeSearch<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNode<K, V>>() {
+class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNode<K, V>>() {
     private fun rightRotate(node: RedBlackTreeNode<K, V>) {
         val temp: RedBlackTreeNode<K, V>? = node.leftChild //temp - old left child node
         /** instead of the left child of the node
