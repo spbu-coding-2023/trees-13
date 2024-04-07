@@ -55,21 +55,21 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
     }
 
     private fun rightRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
-        val x = root.leftChild!!
-        root.leftChild = x.rightChild
-        x.rightChild = root
+        val tempNode = root.leftChild!!
+        root.leftChild = tempNode.rightChild
+        tempNode.rightChild = root
         updateHeight(root)
-        updateHeight(x)
-        return x
+        updateHeight(tempNode)
+        return tempNode
     }
 
     private fun leftRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
-        val y = root.rightChild!!
-        root.rightChild = y.leftChild
-        y.leftChild = root
+        val tempNode = root.rightChild!!
+        root.rightChild = tempNode.leftChild
+        tempNode.leftChild = root
         updateHeight(root)
-        updateHeight(y)
-        return y
+        updateHeight(tempNode)
+        return tempNode
     }
 
     override fun remove(key: K) {
