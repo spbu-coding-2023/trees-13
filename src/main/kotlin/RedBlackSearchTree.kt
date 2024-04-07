@@ -175,36 +175,36 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
     private fun insert(treeRoot: RedBlackTreeNode<K, V>?, key: K, value: V): RedBlackTreeNode<K, V>? {
       val node = RedBlackTreeNode(key, value)
       node.isRed = true
-      var x: RedBlackTreeNode<K, V>? = treeRoot
-      var y: RedBlackTreeNode<K, V>? = null
-      while (x != null) { // searching the place to insert the node
-        y = x
-        x = if (key < x.key) {
-          x.leftChild
-        } else if (key > x.key) {
-          x.rightChild
-        } else if ( x.key == key && x.value == value) { // case of the existence of the node in the tree
+      var currentNode: RedBlackTreeNode<K, V>? = treeRoot
+      var currentNodeParent: RedBlackTreeNode<K, V>? = null
+      while (currentNode != null) { // searching the place to insert the node
+        currentNodeParent = currentNode
+        currentNode = if (key < currentNode.key) {
+          currentNode.leftChild
+        } else if (key > currentNode.key) {
+          currentNode.rightChild
+        } else if ( currentNode.key == key && currentNode.value == value) { // case of the existence of the node in the tree
           throw IllegalArgumentException("The key: $key and value: $value already exists in the tree.")
         } else {
           throw IllegalArgumentException("The key: $key already exists in the tree.")
         }
       }
-      node.parent = y
+      node.parent = currentNodeParent
       /*
        * the cases of filling the first and second
        * levels of the tree ( the root and its children )
        */
-      if (y == null) {
+      if (currentNodeParent == null) {
         node.isRed = false
         root = node
         return root
       } else {
-        if (node.key > y.key) {
-          y.rightChild = node
+        if (node.key > currentNodeParent.key) {
+          currentNodeParent.rightChild = node
         } else {
-          y.leftChild = node
+          currentNodeParent.leftChild = node
         }
-        if (y.parent == null) {
+        if (currentNodeParent.parent == null) {
           return root
         }
       }
