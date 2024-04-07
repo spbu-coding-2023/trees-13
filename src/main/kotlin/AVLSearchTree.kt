@@ -54,6 +54,12 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         root.height = maxOf((root.leftChild?.height ?: 0), (root.rightChild?.height ?: 0)) + 1
     }
 
+    /**
+     * a single left turn is performed
+     * this type of rotation is determined
+     * when a node has a balancing factor of -2
+     * and its right child node has a balancing factor of -1.
+     */
     private fun rightRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
         val tempNode = root.leftChild!!
         root.leftChild = tempNode.rightChild
@@ -63,6 +69,12 @@ class AVLTreeSearch<K : Comparable<K>, V> : TreeSearch<K, V, AVLTreeNode<K, V>>(
         return tempNode
     }
 
+    /**
+     * a single right turn is performed
+     * this type of rotation is determined
+     * when a node has a balancing factor of +2
+     * and its left child has a balancing factor of +1.
+     */
     private fun leftRotate(root: AVLTreeNode<K, V>): AVLTreeNode<K, V> {
         val tempNode = root.rightChild!!
         root.rightChild = tempNode.leftChild
