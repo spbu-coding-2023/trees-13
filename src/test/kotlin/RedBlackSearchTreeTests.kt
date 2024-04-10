@@ -219,6 +219,91 @@ class RedBlackSearchTreeTest {
   }
 
   // REMOVE TEST
+  @Test // NEW
+  fun `rightRotate with two children of the left child`() {
+    val tree = RedBlackSearchTree<Int,Int>()
+    // preparing the tree for the removing
+    tree.insert(listOf(40 to 40, 60 to 60, 20 to 20, 15 to 15, 12 to 12, 10 to 10, 17 to 17, 30 to 30))
+
+    assertEquals(40,tree.root?.key)
+    assertEquals(false,tree.root?.isRed)
+    assertEquals(15, tree.root?.leftChild?.key)
+    assertEquals(true, tree.root?.leftChild?.isRed)
+    assertEquals(60, tree.root?.rightChild?.key)
+    assertEquals(false, tree.root?.rightChild?.isRed)
+    val left : RedBlackTreeNode<Int,Int>? = tree.root?.leftChild?.leftChild
+    val right : RedBlackTreeNode<Int,Int>? = tree.root?.leftChild?.rightChild
+    assertEquals(12, left?.key)
+    assertEquals(false, left?.isRed)
+    assertEquals(10, left?.leftChild?.key)
+    assertEquals(true, left?.leftChild?.isRed)
+    assertEquals(20, right?.key)
+    assertEquals(false, right?.isRed)
+    assertEquals(17,right?.leftChild?.key )
+    assertEquals(true,right?.leftChild?.isRed)
+    assertEquals(30,right?.rightChild?.key )
+    assertEquals(true,right?.rightChild?.isRed) // insert test is correct
+
+    // removing black node without children -> balancing
+
+    tree.remove(60)
+    assertEquals(listOf(10, 12, 15, 17, 20, 30, 40), tree.getKeys())
+    assertEquals(15,tree.root?.key)
+    assertEquals(20,tree.root?.rightChild?.key)
+    assertEquals(40,tree.root?.rightChild?.rightChild?.key)
+    assertEquals(17,tree.root?.rightChild?.leftChild?.key)
+    assertEquals(30,tree.root?.rightChild?.rightChild?.leftChild?.key)
+    assertEquals(12,tree.root?.leftChild?.key)
+    assertEquals(10,tree.root?.leftChild?.leftChild?.key)
+    assertEquals(false,tree.root?.isRed)
+    assertEquals(true,tree.root?.rightChild?.isRed)
+    assertEquals(false,tree.root?.rightChild?.rightChild?.isRed)
+    assertEquals(false,tree.root?.rightChild?.leftChild?.isRed)
+    assertEquals(true,tree.root?.rightChild?.rightChild?.leftChild?.isRed)
+    assertEquals(false,tree.root?.leftChild?.isRed)
+    assertEquals(true,tree.root?.leftChild?.leftChild?.isRed)
+
+  }
+
+  @Test // NEW
+  fun `leftRotate with two children of the right child`() {
+    val tree = RedBlackSearchTree<Int,Int>()
+    // preparing the tree for the removing
+    tree.insert(listOf(40 to 40, 20 to 20, 60 to 60, 65 to 65, 68 to 68, 70 to 70, 63 to 63, 55 to 55))
+
+    assertEquals(40,tree.root?.key)
+    assertEquals(false,tree.root?.isRed)
+    assertEquals(20, tree.root?.leftChild?.key)
+    assertEquals(false, tree.root?.leftChild?.isRed)
+    assertEquals(65, tree.root?.rightChild?.key)
+    assertEquals(true, tree.root?.rightChild?.isRed)
+    var left : RedBlackTreeNode<Int,Int>? = tree.root?.rightChild?.leftChild
+    var right : RedBlackTreeNode<Int,Int>? = tree.root?.rightChild?.rightChild
+    assertEquals(60, left?.key)
+    assertEquals(false, left?.isRed)
+    assertEquals(55, left?.leftChild?.key)
+    assertEquals(true, left?.leftChild?.isRed)
+    assertEquals(63, left?.rightChild?.key)
+    assertEquals(true, left?.rightChild?.isRed)
+    assertEquals(68, right?.key)
+    assertEquals(false, right?.isRed)
+    assertEquals(70, right?.rightChild?.key)
+    assertEquals(true, right?.rightChild?.isRed)// insert test is correct
+
+    // removing black node without children -> balancing
+
+    tree.remove(20)
+    assertEquals(65,tree.root?.key) // error : actual = 65
+    left = tree.root?.leftChild
+    right = tree.root?.rightChild
+    assertEquals(60, left?.key)
+    assertEquals(63, left?.rightChild?.key)
+    assertEquals(68, right?.key)
+    assertEquals(70, right?.rightChild?.key)
+    assertEquals(40, left?.leftChild?.key)
+    assertEquals(55, left?.leftChild?.rightChild?.key)
+  }
+
   @Test
   fun `remove a black node without children and without a sibling should throw an exception`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -332,9 +417,12 @@ class RedBlackSearchTreeTest {
     tree.root?.rightChild?.rightChild?.isRed = false
     tree.root?.rightChild?.leftChild?.isRed = false
     tree.remove(10)
+    assertEquals(30, tree.root?.rightChild?.key)
+    assertEquals(15, tree.root?.leftChild?.key)
+    assertEquals(20, tree.root?.leftChild?.rightChild?.key)
     assertEquals(false, tree.root?.rightChild?.isRed)
-    assertEquals(true, tree.root?.leftChild?.isRed)
-    assertEquals(false, tree.root?.leftChild?.rightChild?.isRed)
+    assertEquals(false, tree.root?.leftChild?.isRed)
+    assertEquals(true, tree.root?.leftChild?.rightChild?.isRed)
     assertEquals(listOf(15, 20, 25, 30), tree.getKeys())
   }
   @Test
