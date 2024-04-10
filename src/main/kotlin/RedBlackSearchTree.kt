@@ -14,7 +14,7 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
             throw NoSuchElementException("The key: $key was not found in the tree.")
         }
         //is stored by the old parent to keep track of whether balancing has been done
-        val oldParent = node.parent?.key
+        val oldParent = node.parent
         //search for the key to be deleted
         if (key < node.key) {
             node.leftChild = remove(node.leftChild, key)
@@ -54,8 +54,11 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
             node.value = temp.value
             node.rightChild = remove(node.rightChild, node.key)
         }
-        //return the node, if there was balancing then we return the parent
-        if (node.parent?.key != oldParent) {
+        //return the node, if there was balancing then we return the parent or root
+        if (oldParent == null) {
+          return root
+        }
+        if (node.parent != oldParent) {
             return node.parent
         }
         return node
@@ -72,7 +75,14 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
       if (sibling.isRed) { //if brother is red, change his color
         sibling.isRed = false
         parent.isRed = true
-        leftRotate(parent)
+        if (parent.rightChild == sibling) {
+          leftRotate(parent)
+          balanceRemove(node)
+        }
+        else {
+          rightRotate(parent)
+          balanceRemove(node)
+        }
       }
       else {
         //if brother is black and without child
@@ -85,7 +95,12 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
           //the node has a black non-root parent, adjust the color or left rotation
           else if (parent.parent != null) {
             parent.isRed = true
-            leftRotate(parent)
+            if (parent.rightChild == sibling) {
+              leftRotate(parent)
+            }
+            else {
+              rightRotate(parent)
+            }
             balanceRemove(sibling)
           }
           //the node has a root parent, adjust the color
@@ -93,21 +108,43 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
             sibling.isRed = true
           }
         }
-        /** if the brother’s right child is red,
-         * the left one is any, then adjust the colors and make a left turn */
-        else if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
-          sibling.isRed = sibling.parent!!.isRed
-          sibling.rightChild!!.isRed = false
-          parent.isRed = false
-          leftRotate(parent)
-        }
-        /** if the brother's left child is red,
-         * then adjust the colors and make a right turn and balance again */
-        else if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
-          sibling.leftChild!!.isRed = false
-          sibling.isRed = true
-          rightRotate(sibling)
-          balanceRemove(node)
+        else {
+          if (parent.rightChild == sibling) {
+            /** if the brother’s right child is red,
+             * the left one is any, then adjust the colors and make a left turn */
+            if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
+              sibling.isRed = sibling.parent!!.isRed
+              sibling.rightChild!!.isRed = false
+              parent.isRed = false
+              leftRotate(parent)
+            }
+            /** if the brother's left child is red,
+             * then adjust the colors and make a right turn and balance again */
+            else if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
+              sibling.leftChild!!.isRed = false
+              sibling.isRed = true
+              rightRotate(sibling)
+              balanceRemove(node)
+            }
+          }
+          else {
+            /** if the brother’s right child is red,
+             * the left one is any, then adjust the colors and make a left turn */
+            if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
+              sibling.isRed = sibling.parent!!.isRed
+              sibling.leftChild!!.isRed = false
+              parent.isRed = false
+              rightRotate(parent)
+            }
+            /** if the brother's left child is red,
+             * then adjust the colors and make a right turn and balance again */
+            else if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
+              sibling.rightChild!!.isRed = false
+              sibling.isRed = true
+              leftRotate(sibling)
+              balanceRemove(node)
+            }
+          }
         }
       }
     }
@@ -165,7 +202,7 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
      */
     override fun insert(key: K, value: V) {
         root = insert(root, key, value)
-        root?.isRed = false
+        root!!.isRed = false
     }
 
     /**
