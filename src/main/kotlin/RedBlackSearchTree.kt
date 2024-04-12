@@ -85,14 +85,14 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
         }
       }
       else {
-        //if brother is black and without child
-        if (sibling.leftChild == null && sibling.rightChild == null) {
+        //if brother is black with black child
+        if ((sibling.leftChild == null && sibling.rightChild == null) || (sibling.leftChild?.isRed == false && sibling.rightChild?.isRed == false)) {
           //the node has a red parent, adjust the color
           if (parent.isRed) {
             sibling.isRed = true
             parent.isRed = false
           }
-          //the node has a black non-root parent, adjust the color or left rotation
+          //the node has a black non-root parent, adjust the color and rotation
           else if (parent.parent != null) {
             parent.isRed = true
             if (parent.rightChild == sibling) {
@@ -112,7 +112,7 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
           if (parent.rightChild == sibling) {
             /** if the brother’s right child is red,
              * the left one is any, then adjust the colors and make a left turn */
-            if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
+            if (sibling.rightChild?.isRed == true) {
               sibling.isRed = sibling.parent!!.isRed
               sibling.rightChild!!.isRed = false
               parent.isRed = false
@@ -120,7 +120,7 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
             }
             /** if the brother's left child is red,
              * then adjust the colors and make a right turn and balance again */
-            else if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
+            else if (sibling.leftChild!!.isRed) {
               sibling.leftChild!!.isRed = false
               sibling.isRed = true
               rightRotate(sibling)
@@ -128,17 +128,17 @@ class RedBlackSearchTree<K : Comparable<K>, V>: TreeSearch<K, V, RedBlackTreeNod
             }
           }
           else {
-            /** if the brother’s right child is red,
-             * the left one is any, then adjust the colors and make a left turn */
-            if (sibling.leftChild != null && sibling.leftChild!!.isRed) {
+            /** if the brother’s left child is red,
+             * the right one is any, then adjust the colors and make a right turn */
+            if (sibling.leftChild?.isRed == true) {
               sibling.isRed = sibling.parent!!.isRed
               sibling.leftChild!!.isRed = false
               parent.isRed = false
               rightRotate(parent)
             }
-            /** if the brother's left child is red,
-             * then adjust the colors and make a right turn and balance again */
-            else if (sibling.rightChild != null && sibling.rightChild!!.isRed) {
+            /** if the brother's right child is red,
+             * then adjust the colors and make a left turn and balance again */
+            else if (sibling.rightChild!!.isRed) {
               sibling.rightChild!!.isRed = false
               sibling.isRed = true
               leftRotate(sibling)
