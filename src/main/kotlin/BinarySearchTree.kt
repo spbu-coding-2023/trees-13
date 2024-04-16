@@ -9,17 +9,12 @@ class BinarySearchTree<K : Comparable<K>, V> : TreeSearch<K, V, BinaryTreeNode<K
   private fun insert(node: BinaryTreeNode<K, V>?, key: K, value: V): BinaryTreeNode<K, V> {
     //when a place for insertion is found, a node with the given key and value is returned
     if (node == null) return BinaryTreeNode(key, value)
-    //Exceptions when inserting an existing key
-    if (node.key == key && node.value == value) {
-      throw IllegalArgumentException("The key: $key and value: $value already exists in the tree.")
-    }
-    if (node.key == key) {
-      throw IllegalArgumentException("The key: $key already exists in the tree.")
-    }
-    if (key > node.key) {
-      node.rightChild = insert(node.rightChild, key, value)
-    } else {
-      node.leftChild = insert(node.leftChild, key, value)
+    when {
+      //Exceptions when inserting an existing key
+      node.key == key && node.value == value -> throw IllegalArgumentException("The key: $key and value: $value already exists in the tree.")
+      node.key == key -> throw IllegalArgumentException("The key: $key already exists in the tree.")
+      key > node.key -> node.rightChild = insert(node.rightChild, key, value)
+      else -> node.leftChild = insert(node.leftChild, key, value)
     }
     return node
   }
