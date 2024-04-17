@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 
 class BinarySearchTreeTest {
-    // INSERT TEST
+    //region INSERT TEST
     @Test
     fun `insertion with existing key should throw IllegalArgumentException`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -21,8 +21,8 @@ class BinarySearchTreeTest {
         tree.insert(5, 3)
         assertEquals(listOf(5, 10, 15), tree.getKeys())
     }
-
-    // REMOVE TEST
+    //endregion
+    //region REMOVE TEST
     @Test
     fun `remove node with no children should remove node correctly`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -62,10 +62,11 @@ class BinarySearchTreeTest {
         tree.insert(10, 5)
         assertFailsWith<NoSuchElementException> { tree.remove(20) }
     }
+    //endregion
 }
 
 class TreeSearchWithBinaryTest {
-    // SEARCH TEST
+    //region SEARCH TEST
     @Test
     fun `search a non-existing key should return null`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -80,8 +81,8 @@ class TreeSearchWithBinaryTest {
         assertEquals(2, tree.search(15))
         assertEquals(3, tree.search(5))
     }
-
-    // GET VALUES(KEYS) TEST
+    //endregion
+    //region GET VALUES(KEYS) TEST
     @Test
     fun `getKeys(Value) with an empty tree it should return empty list`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -96,16 +97,16 @@ class TreeSearchWithBinaryTest {
         assertEquals(listOf(3, 1, 2), tree.getValues())
         assertEquals(listOf(5, 10, 15), tree.getKeys())
     }
-
-    // INSERT SEVERAL KEYS TEST
+    //endregion
+    //region INSERT SEVERAL KEYS TEST
     @Test
     fun `insert several keys should succeed`() {
         val tree = BinarySearchTree<Int, Int>()
         tree.insert(listOf(20 to 1, 5 to 2, 15 to 3))
         assertEquals(listOf(5, 15, 20), tree.getKeys())
     }
-
-    // REMOVE SEVERAL KEYS TEST
+    //endregion
+    //region REMOVE SEVERAL KEYS TEST
     @Test
     fun `remove several keys should succeed`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -113,8 +114,8 @@ class TreeSearchWithBinaryTest {
         tree.remove(listOf(20, 5, 30))
         assertEquals(listOf(15, 25), tree.getKeys())
     }
-
-    // GET MIN(MAX) TEST
+    //endregion
+    //region GET MIN(MAX) TEST
     @Test
     fun `getMin(Max) with a empty tree should return a null`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -129,8 +130,8 @@ class TreeSearchWithBinaryTest {
         assertEquals(5, tree.getMinKey())
         assertEquals(15, tree.getMaxKey())
     }
-
-    // MIN NODE TEST
+    //endregion
+    //region MIN NODE TEST
     @Test
     fun `getMinNode should return a min node`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -138,8 +139,8 @@ class TreeSearchWithBinaryTest {
         tree.remove(10)
         assertEquals(listOf(5, 12, 15, 20), tree.getKeys())
     }
-
-    // REPLACE TEST
+    //endregion
+    //region REPLACE TEST
     @Test
     fun `replace value should succeed`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -155,8 +156,8 @@ class TreeSearchWithBinaryTest {
         tree.insert(10, 5)
         assertFailsWith<NoSuchElementException> { tree.replaceValue(20, 2) }
     }
-
-    // CLEAN TEST
+    //endregion
+    //region CLEAN TEST
     @Test
     fun `clean should succeed`() {
         val tree = BinarySearchTree<Int, Int>()
@@ -164,5 +165,6 @@ class TreeSearchWithBinaryTest {
         tree.clean()
         assertEquals(listOf<Int>(), tree.getKeys())
     }
+    //endregion
 }
 

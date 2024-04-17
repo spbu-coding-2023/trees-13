@@ -4,7 +4,7 @@ import kotlin.test.assertFailsWith
 
 
 class AVLTreeMethodTest {
-    //CHECK INSERT
+    //region CHECK INSERT
     @Test
     fun `insertion with existing key and value should throw IllegalArgumentException`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -29,8 +29,8 @@ class AVLTreeMethodTest {
             avlTree.insert(5, "new value")
         }
     }
-
-    //check insert for list
+    //endregion
+    //region check insert for list
     @Test
     fun `insert list of pairs should succeed`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -57,8 +57,8 @@ class AVLTreeMethodTest {
             avlTree.insert(2, "two")
         }
     }
-
-    //check leftRotate
+    //endregion
+    //region check leftRotate
     @Test
     fun `leftRotate should rotate tree to the left correctly in insert`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -84,8 +84,8 @@ class AVLTreeMethodTest {
         assertEquals(4, avlTree.root!!.rightChild!!.key)
         assertEquals(5, avlTree.root!!.rightChild!!.rightChild!!.key)
     }
-
-    //check rightRotate
+    //endregion
+    //region check rightRotate
     @Test
     fun `rightRotate should rotate tree to the right correctly in insert`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -111,8 +111,8 @@ class AVLTreeMethodTest {
         assertEquals(3, avlTree.root!!.rightChild!!.leftChild!!.key)
         assertEquals(5, avlTree.root!!.rightChild!!.rightChild!!.key)
     }
-
-    //check rightLeftRotate
+    //endregion
+    //region check rightLeftRotate
     @Test
     fun `rightleftRotate should rotate tree to the right correctly in insert`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -126,8 +126,8 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
-    //check leftrightRotate
+    //endregion
+    //region check leftrightRotate
     @Test
     fun `leftrightRotate should rotate tree to the right correctly in insert`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -141,8 +141,8 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
-    //CHECK REMOVE
+    //endregion
+    //region CHECK REMOVE
     @Test
     fun `remove node with no children should remove node correctly`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -172,8 +172,8 @@ class AVLTreeMethodTest {
         assertEquals("leftChild", avlTree.search(5))
         assertEquals("rightChild", avlTree.search(15))
     }
-
-    //check leftRotate
+    //endregion
+    //region check leftRotate
     @Test
     fun `leftRotate should rotate tree correctly with three vertex in remove`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -208,8 +208,8 @@ class AVLTreeMethodTest {
         assertEquals("thirty", avlTree.search(30))
         assertEquals("twenty five", avlTree.search(25))
     }
-
-    //check rightRotate
+    //endregion
+    //region check rightRotate
     @Test
     fun `rightRotate should rotate tree correctly with three vertex in insert`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -245,8 +245,8 @@ class AVLTreeMethodTest {
         assertEquals("ten", avlTree.search(10))
 
     }
-
-    //check rightLeftRotate
+    //endregion
+    //region check rightLeftRotate
     @Test
     fun `rightleftRotate should rotate tree correctly in remove`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -262,8 +262,8 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
-    //check leftrightRotate
+    //endregion
+    //region check leftrightRotate
     @Test
     fun `leftrightRotate should rotate tree correctly in remove`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -279,8 +279,8 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
-    //check remove empty tree
+    //endregion
+    //region check remove empty tree
     @Test
     fun `Empty tree`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -288,8 +288,8 @@ class AVLTreeMethodTest {
             avlTree.remove(10)
         }
     }
-
-    //check remove for list
+    //endregion
+    //region check remove for list
     @Test
     fun `remove list of pairs should remove all pairs correctly`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -301,8 +301,8 @@ class AVLTreeMethodTest {
         assertEquals("four", avlTree.search(4))
         assertEquals("five", avlTree.search(5))
     }
-
-    //check remove with use minNode
+    //endregion
+    //region check remove with use minNode
     @Test
     fun `remove with use minNode`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -316,10 +316,11 @@ class AVLTreeMethodTest {
         avlTree.remove(5)
         assertEquals(listOf("Value2", "Value3", "Value4", "Value6", "Value7", "Value8"), avlTree.getValues())
     }
+    //endregion
 }
 
 class AVLTreeSearchTest {
-    //check search
+    //region check search
     @Test
     fun `search should return correct value for existing key`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -339,8 +340,8 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(null, avlTree.search(20))
     }
-
-    //check getValues
+    //endregion
+    //region check getValues
     @Test
     fun `getValues should return values in inorder traversal`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -349,8 +350,8 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(listOf("left", "value", "right"), avlTree.getValues())
     }
-
-    //check getKeys
+    //endregion
+    //region check getKeys
     @Test
     fun `getKeys should return keys in inorder traversal`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -359,8 +360,8 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(listOf(5, 10, 15), avlTree.getKeys())
     }
-
-    //check getMaxKey
+    //endregion
+    //region check getMaxKey
     @Test
     fun `getMaxKey should return maximum key`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -375,8 +376,8 @@ class AVLTreeSearchTest {
         val avlTree = AVLTreeSearch<Int, String>()
         assertEquals(null, avlTree.getMaxKey())
     }
-
-    //check getMinKey
+    //endregion
+    //region check getMinKey
     @Test
     fun `getMinKey should return minimum key`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -391,8 +392,8 @@ class AVLTreeSearchTest {
         val avlTree = AVLTreeSearch<Int, String>()
         assertEquals(null, avlTree.getMinKey())
     }
-
-    //check replaceValue
+    //endregion
+    //region check replaceValue
     @Test
     fun `test ReplaceValue`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -405,8 +406,8 @@ class AVLTreeSearchTest {
             avlTree.replaceValue(4, "NewValue")
         }
     }
-
-    // CLEAN TEST
+    //endregion
+    //region CLEAN TEST
     @Test
     fun `clean should succeed`() {
         val tree = AVLTreeSearch<Int, Int>()
@@ -414,4 +415,5 @@ class AVLTreeSearchTest {
         tree.clean()
         assertEquals(listOf<Int>(), tree.getKeys())
     }
+    //endregion
 }
