@@ -13,14 +13,12 @@ class AVLTreeMethodTest {
             avlTree.insert(5, "value")
         }
     }
-
     @Test
     fun `insertion with non-existing key should succeed`() {
         val avlTree = AVLTreeSearch<Int, String>()
         avlTree.insert(5, "value")
         assertEquals("value", avlTree.search(5))
     }
-
     @Test
     fun `insertion with existing key should throw IllegalArgumentException`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -39,7 +37,6 @@ class AVLTreeMethodTest {
         assertEquals("two", avlTree.search(2))
         assertEquals("three", avlTree.search(3))
     }
-
     @Test
     fun `inserting duplicate keys should throw IllegalArgumentException`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -48,7 +45,6 @@ class AVLTreeMethodTest {
             avlTree.insert(2, "new two")
         }
     }
-
     @Test
     fun `inserting duplicate keys with different values should throw IllegalArgumentException`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -72,11 +68,10 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
     @Test
     fun `leftRotate balancing test in which the node has a child`() {
         val avlTree = AVLTreeSearch<Int, Int>()
-        avlTree.insert(listOf(1 to 1, 0 to 0, 3 to 3, 2 to 2, 4 to 4, 5 to 5))
+        avlTree.insert(listOf(1 to 1, 0 to 0, 3 to 3,  2 to 2, 4 to 4, 5 to 5))
         assertEquals(3, avlTree.root!!.key)
         assertEquals(1, avlTree.root!!.leftChild!!.key)
         assertEquals(0, avlTree.root!!.leftChild!!.leftChild!!.key)
@@ -99,7 +94,6 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
     @Test
     fun `rightRotate balancing test in which the node has a child`() {
         val avlTree = AVLTreeSearch<Int, Int>()
@@ -150,7 +144,6 @@ class AVLTreeMethodTest {
         avlTree.remove(10)
         assertEquals(null, avlTree.search(10))
     }
-
     @Test
     fun `remove node with one child should remove node correctly`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -160,7 +153,6 @@ class AVLTreeMethodTest {
         assertEquals(null, avlTree.search(10))
         assertEquals("leftChild", avlTree.search(5))
     }
-
     @Test
     fun `remove node with two children should remove node correctly`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -189,7 +181,6 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
     @Test
     fun `leftRotate should rotate tree correctly with four vertex in remove`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -225,7 +216,6 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
-
     @Test
     fun `rightRotate should rotate tree correctly with four vertex in remove`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -330,7 +320,6 @@ class AVLTreeSearchTest {
         assertEquals("left", avlTree.search(5))
         assertEquals("right", avlTree.search(15))
     }
-
     @Test
     fun `search should return null for non-existing key`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -369,7 +358,6 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(15, avlTree.getMaxKey())
     }
-
     @Test
     fun `getMaxKey should return null for empty tree`() {
         val avlTree = AVLTreeSearch<Int, String>()
@@ -385,7 +373,6 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(5, avlTree.getMinKey())
     }
-
     @Test
     fun `getMinKey should return null for empty tree`() {
         val avlTree = AVLTreeSearch<Int, String>()
