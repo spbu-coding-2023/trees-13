@@ -12,16 +12,17 @@ interface TreeInterface<K : Comparable<K>, V> {
     fun clean()
 }
 
-abstract class TreeNode<K, V, N: TreeNode<K, V, N>> (var key: K, var value: V) {
+abstract class TreeNode<K, V, N : TreeNode<K, V, N>>(var key: K, var value: V) {
     var leftChild: N? = null
     var rightChild: N? = null
 }
 
-abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInterface<K, V> {
+abstract class TreeSearch<K : Comparable<K>, V, N : TreeNode<K, V, N>> : TreeInterface<K, V> {
     internal var root: N? = null
     override fun search(key: K): V? {
         return search(root, key)?.value
     }
+
     private fun search(root: N?, key: K): N? {
         if (root == null) {
             return null
@@ -48,6 +49,7 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         inOrderTraversal(root) { keys.add(it.key) }
         return keys
     }
+
     private fun inOrderTraversal(root: N?, action: (N) -> Unit) {
         if (root == null) return
         inOrderTraversal(root.leftChild, action)
@@ -89,7 +91,7 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
     protected fun minNode(node: N): N {
         var nodeCurrent = node
         while (true)
-          nodeCurrent = nodeCurrent.leftChild ?: break
+            nodeCurrent = nodeCurrent.leftChild ?: break
         return nodeCurrent
     }
 
@@ -98,6 +100,7 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
             insert(i.first, i.second)
         }
     }
+
     override fun remove(list: List<K>) {
         for (i in list) {
             remove(i)
@@ -109,6 +112,7 @@ abstract class TreeSearch<K : Comparable<K>, V, N: TreeNode<K, V, N>> : TreeInte
         val result = search(root, key) ?: throw NoSuchElementException("The key: $key was not found in the tree.")
         result.value = newValue
     }
+
     override fun clean() {
         for (i in getKeys()) {
             remove(i)
