@@ -21,6 +21,7 @@ class BinarySearchTreeTest {
         tree.insert(5, 3)
         assertEquals(listOf(5, 10, 15), tree.getKeys())
     }
+
     //endregion
     //region REMOVE TEST
     @Test
@@ -81,6 +82,7 @@ class TreeSearchWithBinaryTest {
         assertEquals(2, tree.search(15))
         assertEquals(3, tree.search(5))
     }
+
     //endregion
     //region GET VALUES(KEYS) TEST
     @Test
@@ -97,6 +99,7 @@ class TreeSearchWithBinaryTest {
         assertEquals(listOf(3, 1, 2), tree.getValues())
         assertEquals(listOf(5, 10, 15), tree.getKeys())
     }
+
     //endregion
     //region INSERT SEVERAL KEYS TEST
     @Test
@@ -105,6 +108,7 @@ class TreeSearchWithBinaryTest {
         tree.insert(listOf(20 to 1, 5 to 2, 15 to 3))
         assertEquals(listOf(5, 15, 20), tree.getKeys())
     }
+
     //endregion
     //region REMOVE SEVERAL KEYS TEST
     @Test
@@ -114,6 +118,7 @@ class TreeSearchWithBinaryTest {
         tree.remove(listOf(20, 5, 30))
         assertEquals(listOf(15, 25), tree.getKeys())
     }
+
     //endregion
     //region GET MIN(MAX) TEST
     @Test
@@ -130,6 +135,7 @@ class TreeSearchWithBinaryTest {
         assertEquals(5, tree.getMinKey())
         assertEquals(15, tree.getMaxKey())
     }
+
     //endregion
     //region MIN NODE TEST
     @Test
@@ -139,6 +145,7 @@ class TreeSearchWithBinaryTest {
         tree.remove(10)
         assertEquals(listOf(5, 12, 15, 20), tree.getKeys())
     }
+
     //endregion
     //region REPLACE TEST
     @Test
@@ -156,6 +163,7 @@ class TreeSearchWithBinaryTest {
         tree.insert(10, 5)
         assertFailsWith<NoSuchElementException> { tree.replaceValue(20, 2) }
     }
+
     //endregion
     //region CLEAN TEST
     @Test

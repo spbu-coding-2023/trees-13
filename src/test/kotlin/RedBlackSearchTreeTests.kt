@@ -167,6 +167,7 @@ class RedBlackSearchTreeTest {
         assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.value, "node6")
         assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.isRed, true)
     }
+
     //endregion
     //region LEFT ROTATE TEST
     @Test
@@ -182,6 +183,7 @@ class RedBlackSearchTreeTest {
         assertEquals(2, tree.search(20))
         assertEquals(3, tree.search(30))
     }
+
     //endregion
     //region RIGHT ROTATE TEST
     @Test
@@ -197,6 +199,7 @@ class RedBlackSearchTreeTest {
         assertEquals(2, tree.search(20))
         assertEquals(3, tree.search(30))
     }
+
     //endregion
     //region RIGHT-LEFT ROTATE
     @Test
@@ -212,6 +215,7 @@ class RedBlackSearchTreeTest {
         assertEquals(2, tree.search(20))
         assertEquals(3, tree.search(30))
     }
+
     //endregion
     //region LEFT-RIGHT ROTATE TEST
     @Test
@@ -227,6 +231,7 @@ class RedBlackSearchTreeTest {
         assertEquals(2, tree.search(20))
         assertEquals(3, tree.search(30))
     }
+
     //endregion
     //region REMOVE TEST
     @Test
@@ -408,6 +413,7 @@ class TreeSearchWithRedBlackTest {
         assertEquals(2, tree.search(15))
         assertEquals(3, tree.search(5))
     }
+
     //endregion
     //region REMOVE SEVERAL KEYS TEST
     @Test
@@ -417,6 +423,7 @@ class TreeSearchWithRedBlackTest {
         tree.remove(listOf(20, 5, 30))
         assertEquals(listOf(15, 25), tree.getKeys())
     }
+
     //endregion
     //region INSERT SEVERAL KEYS TEST
     @Test
@@ -425,6 +432,7 @@ class TreeSearchWithRedBlackTest {
         tree.insert(listOf(20 to 1, 5 to 2, 15 to 3, 25 to 4, 30 to 5))
         assertEquals(listOf(5, 15, 20, 25, 30), tree.getKeys())
     }
+
     //endregion
     //region GET VALUES(KEYS) TEST
     @Test
@@ -441,6 +449,7 @@ class TreeSearchWithRedBlackTest {
         assertEquals(listOf(3, 1, 2), tree.getValues())
         assertEquals(listOf(5, 10, 15), tree.getKeys())
     }
+
     //endregion
     //region GET MIN(MAX) TEST
     @Test
@@ -457,6 +466,7 @@ class TreeSearchWithRedBlackTest {
         assertEquals(5, tree.getMinKey())
         assertEquals(15, tree.getMaxKey())
     }
+
     //endregion
     //region MIN NODE TEST
     @Test
@@ -466,6 +476,7 @@ class TreeSearchWithRedBlackTest {
         tree.remove(10)
         assertEquals(listOf(5, 12, 15, 20), tree.getKeys())
     }
+
     //endregion
     //region REPLACE TEST
     @Test
@@ -483,6 +494,7 @@ class TreeSearchWithRedBlackTest {
         tree.insert(10, 5)
         assertFailsWith<NoSuchElementException> { tree.replaceValue(20, 2) }
     }
+
     //endregion
     //region CLEAN TEST
     @Test

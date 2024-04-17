@@ -29,6 +29,7 @@ class AVLTreeMethodTest {
             avlTree.insert(5, "new value")
         }
     }
+
     //endregion
     //region check insert for list
     @Test
@@ -57,6 +58,7 @@ class AVLTreeMethodTest {
             avlTree.insert(2, "two")
         }
     }
+
     //endregion
     //region check leftRotate
     @Test
@@ -84,6 +86,7 @@ class AVLTreeMethodTest {
         assertEquals(4, avlTree.root!!.rightChild!!.key)
         assertEquals(5, avlTree.root!!.rightChild!!.rightChild!!.key)
     }
+
     //endregion
     //region check rightRotate
     @Test
@@ -111,6 +114,7 @@ class AVLTreeMethodTest {
         assertEquals(3, avlTree.root!!.rightChild!!.leftChild!!.key)
         assertEquals(5, avlTree.root!!.rightChild!!.rightChild!!.key)
     }
+
     //endregion
     //region check rightLeftRotate
     @Test
@@ -126,6 +130,7 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
+
     //endregion
     //region check leftrightRotate
     @Test
@@ -141,6 +146,7 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
+
     //endregion
     //region CHECK REMOVE
     @Test
@@ -172,6 +178,7 @@ class AVLTreeMethodTest {
         assertEquals("leftChild", avlTree.search(5))
         assertEquals("rightChild", avlTree.search(15))
     }
+
     //endregion
     //region check leftRotate
     @Test
@@ -208,6 +215,7 @@ class AVLTreeMethodTest {
         assertEquals("thirty", avlTree.search(30))
         assertEquals("twenty five", avlTree.search(25))
     }
+
     //endregion
     //region check rightRotate
     @Test
@@ -245,6 +253,7 @@ class AVLTreeMethodTest {
         assertEquals("ten", avlTree.search(10))
 
     }
+
     //endregion
     //region check rightLeftRotate
     @Test
@@ -262,6 +271,7 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
+
     //endregion
     //region check leftrightRotate
     @Test
@@ -279,6 +289,7 @@ class AVLTreeMethodTest {
         assertEquals("twenty", avlTree.search(20))
         assertEquals("thirty", avlTree.search(30))
     }
+
     //endregion
     //region check remove empty tree
     @Test
@@ -288,6 +299,7 @@ class AVLTreeMethodTest {
             avlTree.remove(10)
         }
     }
+
     //endregion
     //region check remove for list
     @Test
@@ -301,6 +313,7 @@ class AVLTreeMethodTest {
         assertEquals("four", avlTree.search(4))
         assertEquals("five", avlTree.search(5))
     }
+
     //endregion
     //region check remove with use minNode
     @Test
@@ -340,6 +353,7 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(null, avlTree.search(20))
     }
+
     //endregion
     //region check getValues
     @Test
@@ -350,6 +364,7 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(listOf("left", "value", "right"), avlTree.getValues())
     }
+
     //endregion
     //region check getKeys
     @Test
@@ -360,6 +375,7 @@ class AVLTreeSearchTest {
         avlTree.insert(15, "right")
         assertEquals(listOf(5, 10, 15), avlTree.getKeys())
     }
+
     //endregion
     //region check getMaxKey
     @Test
@@ -376,6 +392,7 @@ class AVLTreeSearchTest {
         val avlTree = AVLTreeSearch<Int, String>()
         assertEquals(null, avlTree.getMaxKey())
     }
+
     //endregion
     //region check getMinKey
     @Test
@@ -392,6 +409,7 @@ class AVLTreeSearchTest {
         val avlTree = AVLTreeSearch<Int, String>()
         assertEquals(null, avlTree.getMinKey())
     }
+
     //endregion
     //region check replaceValue
     @Test
@@ -406,6 +424,7 @@ class AVLTreeSearchTest {
             avlTree.replaceValue(4, "NewValue")
         }
     }
+
     //endregion
     //region CLEAN TEST
     @Test
