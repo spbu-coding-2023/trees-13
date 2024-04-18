@@ -4,10 +4,18 @@ class RedBlackTreeNode<K, V>(key: K, value: V) : TreeNode<K, V, RedBlackTreeNode
 }
 
 class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNode<K, V>>() {
+  /**
+   * Public method to remove a specified key from a tree
+   * calls a private method and updates the root of the tree
+   */
   override fun remove(key: K) {
     root = remove(root, key)
   }
 
+  /**
+   * The method removes the specified key from the tree,
+   * returns the root of the updated tree. Uses recursion
+   */
   private fun remove(node: RedBlackTreeNode<K, V>?, key: K): RedBlackTreeNode<K, V>? {
     //if the key is not found, an exception is thrown
     if (node == null) {
@@ -62,6 +70,10 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
     return node
   }
 
+  /**
+   * The method balances the tree after removing a node
+   * in some cases called recursively
+   */
   private fun balanceRemove(node: RedBlackTreeNode<K, V>) {
     val parent = node.parent ?: return
     val sibling = if (parent.leftChild == node) parent.rightChild else parent.leftChild
@@ -142,6 +154,10 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
     }
   }
 
+  /**
+   * The method implements a right turn in a tree,
+   * takes a node relative to which we make a turn
+   */
   private fun rightRotate(node: RedBlackTreeNode<K, V>) {
     val temp: RedBlackTreeNode<K, V>? = node.leftChild //temp - old left child node
     /* instead of the left child of the node
@@ -165,6 +181,10 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
     node.parent = temp
   }
 
+  /**
+   * The method implements a left turn in a tree,
+   * takes a node relative to which we make a turn
+   */
   private fun leftRotate(node: RedBlackTreeNode<K, V>) {
     val temp: RedBlackTreeNode<K, V>? = node.rightChild //temp - old right child node
     /* instead of the right child of the node
@@ -189,7 +209,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
   }
 
   /**
-   * The method returns the root value after inserting the node wiht following key and value parameters
+   * The method returns the root value after inserting the node with following key and value parameters
    * @param K comparable type: key of the node to be inserted
    * @param V type: value of the node to be inserted
    */

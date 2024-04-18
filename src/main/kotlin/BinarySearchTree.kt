@@ -1,11 +1,18 @@
-class BinaryTreeNode<K, V>(key: K, value: V) : TreeNode<K, V, BinaryTreeNode<K, V>>(key, value) {
-}
+class BinaryTreeNode<K, V>(key: K, value: V) : TreeNode<K, V, BinaryTreeNode<K, V>>(key, value) {}
 
 class BinarySearchTree<K : Comparable<K>, V> : TreeSearch<K, V, BinaryTreeNode<K, V>>() {
+  /**
+   * Public method for inserting the specified key with the specified value into the tree.
+   * calls a private method and updates the root of the tree
+   */
   override fun insert(key: K, value: V) {
     root = insert(root, key, value)
   }
 
+  /**
+   * The method inserts the specified key and the specified value into the tree,
+   * returns the root of the updated tree. Uses recursion
+   */
   private fun insert(node: BinaryTreeNode<K, V>?, key: K, value: V): BinaryTreeNode<K, V> {
     //when a place for insertion is found, a node with the given key and value is returned
     if (node == null) return BinaryTreeNode(key, value)
@@ -19,10 +26,18 @@ class BinarySearchTree<K : Comparable<K>, V> : TreeSearch<K, V, BinaryTreeNode<K
     return node
   }
 
+  /**
+   * Public method to remove a specified key from a tree
+   * calls a private method and updates the root of the tree
+   */
   override fun remove(key: K) {
     root = remove(root, key)
   }
 
+  /**
+   * The method removes the specified key from the tree,
+   * returns the root of the updated tree. Uses recursion
+   */
   private fun remove(node: BinaryTreeNode<K, V>?, key: K): BinaryTreeNode<K, V>? {
     //Exception when deleting a non-existent key
     if (node == null) {
@@ -36,8 +51,7 @@ class BinarySearchTree<K : Comparable<K>, V> : TreeSearch<K, V, BinaryTreeNode<K
        * then replace the node with an existing child or null */
       val nodeLeft = node.leftChild
       val nodeRight = node.rightChild
-      if (nodeLeft == null || nodeRight == null)
-        return nodeLeft ?: nodeRight
+      if (nodeLeft == null || nodeRight == null) return nodeLeft ?: nodeRight
       else {
         val nodeTemp = minNode(nodeRight)
         node.key = nodeTemp.key
