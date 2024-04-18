@@ -21,7 +21,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
     } else if (key > node.key) {
       node.rightChild = remove(node.rightChild, key)
     } else {
-      /* if the node being deleted has no children,
+      /** if the node being deleted has no children,
        * then if the node is red then we replace it with zero,
        * if it is black then we do balancing and replace the node with zero */
       if (node.leftChild == null && node.rightChild == null) {
@@ -32,7 +32,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
           return null
         }
       }
-      /* if one child is missing, replace the node
+      /** if one child is missing, replace the node
        * with this child and adjust the color */
       if (node.leftChild == null) {
         node.rightChild!!.isRed = false
@@ -44,7 +44,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
         node.leftChild!!.parent = node.parent
         return node.leftChild
       }
-      /* if the node to be deleted has 2 children,
+      /** if the node to be deleted has 2 children,
        * then we look for the leftmost child of the right subtree
        * and put it instead of the node to be deleted, and delete the node */
       val temp = minNode(node.rightChild!!)
@@ -65,7 +65,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
   private fun balanceRemove(node: RedBlackTreeNode<K, V>) {
     val parent = node.parent ?: return
     val sibling = if (parent.leftChild == node) parent.rightChild else parent.leftChild
-    /* always, when we call balancing, the node has a brother
+    /** always, when we call balancing, the node has a brother
      * that is not equal to null (otherwise the tree would not be balanced) */
     if (sibling == null) {
       throw RuntimeException("Tree invalid balanced")
@@ -104,7 +104,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
         }
       } else {
         if (parent.rightChild == sibling) {
-          /* if the brother’s right child is red,
+          /** if the brother’s right child is red,
            * the left one is any, then adjust the colors and make a left turn */
           if (sibling.rightChild?.isRed == true) {
             sibling.isRed = sibling.parent!!.isRed
@@ -112,7 +112,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
             parent.isRed = false
             leftRotate(parent)
           }
-          /* if the brother's left child is red,
+          /** if the brother's left child is red,
            * then adjust the colors and make a right turn and balance again */
           else if (sibling.leftChild!!.isRed) {
             sibling.leftChild!!.isRed = false
@@ -121,7 +121,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
             balanceRemove(node)
           }
         } else {
-          /* if the brother’s left child is red,
+          /** if the brother’s left child is red,
            * the right one is any, then adjust the colors and make a right turn */
           if (sibling.leftChild?.isRed == true) {
             sibling.isRed = sibling.parent!!.isRed
@@ -129,7 +129,7 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
             parent.isRed = false
             rightRotate(parent)
           }
-          /* if the brother's right child is red,
+          /** if the brother's right child is red,
            * then adjust the colors and make a left turn and balance again */
           else if (sibling.rightChild!!.isRed) {
             sibling.rightChild!!.isRed = false
@@ -144,11 +144,11 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
 
   private fun rightRotate(node: RedBlackTreeNode<K, V>) {
     val temp: RedBlackTreeNode<K, V>? = node.leftChild //temp - old left child node
-    /* instead of the left child of the node
+    /** instead of the left child of the node
      * we put the right child of the temp */
     node.leftChild = temp?.rightChild
     temp?.rightChild?.parent = node
-    /* replace the node of the temp,
+    /** replace the node of the temp,
      * keeping its right child */
     temp?.parent = node.parent
     if (node.parent == null) {
@@ -167,11 +167,11 @@ class RedBlackSearchTree<K : Comparable<K>, V> : TreeSearch<K, V, RedBlackTreeNo
 
   private fun leftRotate(node: RedBlackTreeNode<K, V>) {
     val temp: RedBlackTreeNode<K, V>? = node.rightChild //temp - old right child node
-    /* instead of the right child of the node
+    /** instead of the right child of the node
      * we put the left child of the temp */
     node.rightChild = temp?.leftChild
     temp?.leftChild?.parent = node
-    /* replace the node of the temp,
+    /** replace the node of the temp,
      * keeping its left child */
     temp?.parent = node.parent
     if (node.parent == null) {

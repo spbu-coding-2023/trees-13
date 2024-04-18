@@ -32,7 +32,7 @@ class BinarySearchTree<K : Comparable<K>, V> : TreeSearch<K, V, BinaryTreeNode<K
     } else if (node.key > key) {
       node.leftChild = remove(node.leftChild, key)
     } else { //the key to be deleted was found
-      /* if the node to be deleted does not have at least 1 child,
+      /** if the node to be deleted does not have at least 1 child,
        * then replace the node with an existing child or null */
       val nodeLeft = node.leftChild
       val nodeRight = node.rightChild
