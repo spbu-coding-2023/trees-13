@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertFailsWith
 
 class RedBlackSearchTreeTest {
-  // INSERT TEST
+  //region INSERT TEST
   @Test
   fun `insertion with existing key should throw IllegalArgumentException`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -167,8 +167,8 @@ class RedBlackSearchTreeTest {
     assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.value, "node6")
     assertEquals(tree.root?.rightChild?.leftChild?.leftChild?.isRed, true)
   }
-
-  //LEFT ROTATE TEST
+  //endregion
+  //region LEFT ROTATE TEST
   @Test
   fun `leftRotate should rotate tree to the left correctly in insert`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -200,8 +200,9 @@ class RedBlackSearchTreeTest {
     assertEquals(40, left?.leftChild?.key)
     assertEquals(55, left?.leftChild?.rightChild?.key)
   }
+  //endregion
 
-  // RIGHT ROTATE TEST
+  //region RIGHT ROTATE TEST
   @Test
   fun `rightRotate should rotate tree to the right correctly in insert`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -239,8 +240,9 @@ class RedBlackSearchTreeTest {
     assertEquals(false, tree.root?.leftChild?.isRed)
     assertEquals(true, tree.root?.leftChild?.leftChild?.isRed)
   }
+  //endregion
 
-  //RIGHT-LEFT ROTATE
+  //region RIGHT-LEFT ROTATE
   @Test
   fun `right-left rotate should rotate tree to the right correctly in insert`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -254,8 +256,9 @@ class RedBlackSearchTreeTest {
     assertEquals(2, tree.search(20))
     assertEquals(3, tree.search(30))
   }
+  //endregion
 
-  // LEFT-RIGHT ROTATE TEST
+  //region LEFT-RIGHT ROTATE TEST
   @Test
   fun `left-right rotate should rotate tree to the right correctly in insert`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -269,8 +272,9 @@ class RedBlackSearchTreeTest {
     assertEquals(2, tree.search(20))
     assertEquals(3, tree.search(30))
   }
+  //endregion
 
-  // REMOVE TEST
+  //region REMOVE TEST
   @Test
   fun `remove a black node without children and without a sibling should throw an exception`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -586,10 +590,11 @@ class RedBlackSearchTreeTest {
     assertEquals(true, tree.root?.rightChild?.leftChild?.isRed)
     assertEquals(listOf(5, 10, 15, 20), tree.getKeys())
   }
+  //endregion
 }
 
 class TreeSearchWithRedBlackTest {
-  // SEARCH TEST
+  //region SEARCH TEST
   @Test
   fun `search a non-existing key should return null`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -604,8 +609,9 @@ class TreeSearchWithRedBlackTest {
     assertEquals(2, tree.search(15))
     assertEquals(3, tree.search(5))
   }
+  //endregion
 
-  // REMOVE SEVERAL KEYS TEST
+  //region REMOVE SEVERAL KEYS TEST
   @Test
   fun `remove several keys should succeed)`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -613,16 +619,18 @@ class TreeSearchWithRedBlackTest {
     tree.remove(listOf(20, 5, 30))
     assertEquals(listOf(15, 25), tree.getKeys())
   }
+  //endregion
 
-  // INSERT SEVERAL KEYS TEST
+  //region INSERT SEVERAL KEYS TEST
   @Test
   fun `insert several keys should succeed)`() {
     val tree = RedBlackSearchTree<Int, Int>()
     tree.insert(listOf(20 to 1, 5 to 2, 15 to 3, 25 to 4, 30 to 5))
     assertEquals(listOf(5, 15, 20, 25, 30), tree.getKeys())
   }
+  //endregion
 
-  // GET VALUES(KEYS) TEST
+  //region GET VALUES(KEYS) TEST
   @Test
   fun `getKeys(Value) with an empty tree it should return empty list`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -637,8 +645,9 @@ class TreeSearchWithRedBlackTest {
     assertEquals(listOf(3, 1, 2), tree.getValues())
     assertEquals(listOf(5, 10, 15), tree.getKeys())
   }
+  //endregion
 
-  // GET MIN(MAX) TEST
+  //region GET MIN(MAX) TEST
   @Test
   fun `getMin(Max) with a empty tree should return a null)`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -653,8 +662,9 @@ class TreeSearchWithRedBlackTest {
     assertEquals(5, tree.getMinKey())
     assertEquals(15, tree.getMaxKey())
   }
+  //endregion
 
-  // MIN NODE TEST
+  //region MIN NODE TEST
   @Test
   fun `getMinNode should return a min node)`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -662,8 +672,9 @@ class TreeSearchWithRedBlackTest {
     tree.remove(10)
     assertEquals(listOf(5, 12, 15, 20), tree.getKeys())
   }
+  //endregion
 
-  // REPLACE TEST
+  //region REPLACE TEST
   @Test
   fun `replace value should succeed)`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -679,8 +690,9 @@ class TreeSearchWithRedBlackTest {
     tree.insert(10, 5)
     assertFailsWith<NoSuchElementException> { tree.replaceValue(20, 2) }
   }
+  //endregion
 
-  // CLEAN TEST
+  //region CLEAN TEST
   @Test
   fun `clean should succeed`() {
     val tree = RedBlackSearchTree<Int, Int>()
@@ -688,4 +700,5 @@ class TreeSearchWithRedBlackTest {
     tree.clean()
     assertEquals(listOf<Int>(), tree.getKeys())
   }
+  //endregion
 }
